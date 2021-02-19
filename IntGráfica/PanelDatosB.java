@@ -7,7 +7,7 @@ public class PanelDatosB extends JPanel implements ActionListener
   JButton btnGuardar, btnSalir;//visibilidad a nivel de clase
   JTextField txtNombre, txtApellidos, txtTelefono;
   JRadioButton amigo, conocido;
-  ManejoPersona datos;
+  ManejoPersona datos = new ManejoPersona();
   
   public PanelDatosB()
   {
@@ -45,15 +45,41 @@ public class PanelDatosB extends JPanel implements ActionListener
   
   public void actionPerformed(ActionEvent e)
   {
-    if (e.getSource() == btnGuardar) {
-         datos = new ManejoPersona(txtNombre.getText(), txtApellidos.getText(),
-         txtTelefono.getText(),"Amigo");
-         datos.imprimir();
-         JOptionPane.showMessageDialog(null, "Se guardarán los datos",
-            "Aviso", JOptionPane.INFORMATION_MESSAGE);		
-          }
+    String tipo="Conocido";
+    
+    if (e.getSource() == btnGuardar) 
+      {
+         if(amigo.isSelected())
+                tipo="Amigo";
+         if(txtNombre.getText() == null || txtNombre.getText().isEmpty())
+         {
+          JOptionPane.showMessageDialog(null, "Debe de ir al menos el nombre de la persona",
+            "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            txtNombre.requestFocus();
+         }
+        else
+         if(txtTelefono.getText() == null || txtTelefono.getText().isEmpty())
+         {
+          JOptionPane.showMessageDialog(null, "Se debe de colocar el teléfono de la persona",
+            "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            txtTelefono.requestFocus();
+         }
+        else
+          {
+           datos.agregar(txtNombre.getText(), txtApellidos.getText(),
+           txtTelefono.getText(),tipo);
+           JOptionPane.showMessageDialog(null, "Se guardarán los datos",
+              "Aviso", JOptionPane.INFORMATION_MESSAGE);	
+            txtNombre.setText("");
+            txtApellidos.setText("");
+            txtTelefono.setText("");
+            txtNombre.requestFocus();
+               // datos.mostrar();
+           }
+         }
 		if (e.getSource() == btnSalir) {
+         datos.mostrar();
 			System.exit(0);
         }
   }
-}//Clase
+}
