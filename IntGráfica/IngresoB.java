@@ -45,7 +45,7 @@ public class IngresoB extends Panel implements ActionListener
            if(usuario.equals("Areli") && password.equals("1234")) 
             {
               JOptionPane.showMessageDialog(null, "Bienvenido Administrador");
-              JFrameDatos datos = new JFrameDatos();
+              JFrameDatosB datos = new JFrameDatosB();
             }
            else
             {
