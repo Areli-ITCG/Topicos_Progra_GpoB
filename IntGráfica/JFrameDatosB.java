@@ -11,6 +11,8 @@ public class JFrameDatosB extends JFrame
    
    private void initComponents()
    {
+     super.setVisible(false);
+     super.dispose();
      setSize(300,200);
      setTitle("Datos Personales");
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
